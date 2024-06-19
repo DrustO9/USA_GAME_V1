@@ -2,13 +2,22 @@ import turtle
 import pandas
 
 screen = turtle.Screen()
-screen.title("US State Game")
-image = "blank_states_img.gif"
+answer_choice = screen.textinput(title="Which map - USA / INDIA",
+                                 prompt="Enter your chosen country here").title()
+
+if answer_choice == "Usa":
+    country_csv = "50_states.csv"
+    image = "blank_states_img.gif"
+else:
+    country_csv = "indian_states.csv"
+    image = "india_map.gif"
+
+screen.title(f"{answer_choice}'s State Finding Game")
 screen.addshape(image)
 turtle.shape(image)
 
 
-data = pandas.read_csv("50_states.csv")
+data = pandas.read_csv(country_csv)
 all_states = data.state.to_list()
 total_guesses = len(data)
 guessed_state = []
